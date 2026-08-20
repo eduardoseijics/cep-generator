@@ -1,5 +1,12 @@
-.field-group > label { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
-.search-wrap { position: relative; }
+.field-group > label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.search-wrap {
+  position: relative;
+}
 
 .search-wrap svg {
   position: absolute;
@@ -24,8 +31,13 @@
   transition: 0.2s;
 }
 
-.search-wrap input:focus { border-color: #7564e9; box-shadow: 0 0 0 3px #6655dc16; }
-.search-wrap input::placeholder { color: #a0a5b2; }
+.search-wrap input:focus {
+  border-color: #7564e9;
+  box-shadow: 0 0 0 3px #6655dc16;
+}
+.search-wrap input::placeholder {
+  color: #a0a5b2;
+}
 
 .state-list {
   max-height: 116px;
@@ -54,8 +66,28 @@
   font-weight: 500;
 }
 
-.state-option:last-child { border-bottom: 0; }
-.state-option:hover { background: #f8f7ff; }
-.state-option.selected { color: #5a48d2; background: #f3f1ff; font-weight: 700; }
-.state-option svg { width: 15px; margin-left: auto; fill: none; stroke: currentColor; stroke-width: 2; opacity: 0.55; }
-.uf-chip { width: 29px; height: 22px; border-radius: 6px; font-size: 9px; }
+.state-option:last-child {
+  border-bottom: 0;
+}
+.state-option:hover {
+  background: #f8f7ff;
+}
+.state-option.selected {
+  color: #5a48d2;
+  background: #f3f1ff;
+  font-weight: 700;
+}
+.state-option svg {
+  width: 15px;
+  margin-left: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.55;
+}
+.uf-chip {
+  width: 29px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 9px;
+}

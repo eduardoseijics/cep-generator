@@ -1,10 +1,34 @@
-.custom-section { margin-top: 15px; padding-top: 1px; border-top: 1px solid #e7e8ed; }
-.custom-section .section-title { margin-top: 13px; }
-.custom-section .section-title > div { display: flex; align-items: baseline; gap: 7px; }
-.custom-section .section-title span { color: #999eaa; font-size: 8px; }
-.add-button { display: flex; align-items: center; gap: 4px; color: #6251da !important; }
-.add-button b { font-size: 15px; line-height: 8px; }
-.custom-list { display: grid; gap: 6px; }
+.custom-section {
+  margin-top: 15px;
+  padding-top: 1px;
+  border-top: 1px solid #e7e8ed;
+}
+.custom-section .section-title {
+  margin-top: 13px;
+}
+.custom-section .section-title > div {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.custom-section .section-title span {
+  color: #999eaa;
+  font-size: 8px;
+}
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #6251da !important;
+}
+.add-button b {
+  font-size: 15px;
+  line-height: 8px;
+}
+.custom-list {
+  display: grid;
+  gap: 6px;
+}
 
 .custom-item {
   display: flex;
@@ -17,9 +41,23 @@
   background: #fff;
 }
 
-.custom-info { display: grid; min-width: 0; flex: 1; gap: 1px; }
-.custom-info strong { font-family: "SFMono-Regular", Consolas, monospace; font-size: 10px; }
-.custom-info small { overflow: hidden; color: #959aa7; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.custom-info {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 1px;
+}
+.custom-info strong {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+}
+.custom-info small {
+  overflow: hidden;
+  color: #959aa7;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .custom-item button {
   display: grid;
@@ -34,12 +72,28 @@
   cursor: pointer;
 }
 
-.custom-item button:hover { color: #5f4ed8; background: #f0edff; }
+.custom-item button:hover {
+  color: #5f4ed8;
+  background: #f0edff;
+}
 .custom-item button[data-copy]:hover,
-.custom-item button[data-copy].copied { color: #24815a; background: #eaf8f0; }
-.custom-item button[data-copy].copied { transform: scale(0.92); }
-.custom-item button:last-child:hover { color: #d9525e; background: #fff0f1; }
-.custom-item button svg { width: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.custom-item button[data-copy].copied {
+  color: #24815a;
+  background: #eaf8f0;
+}
+.custom-item button[data-copy].copied {
+  transform: scale(0.92);
+}
+.custom-item button:last-child:hover {
+  color: #d9525e;
+  background: #fff0f1;
+}
+.custom-item button svg {
+  width: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
 
 .custom-empty {
   margin: 0;

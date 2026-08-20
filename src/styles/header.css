@@ -19,9 +19,23 @@
   box-shadow: 0 6px 14px #6553e633;
 }
 
-.brand-mark svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
-.topbar h1 { margin: 0; font-size: 16px; line-height: 1.2; letter-spacing: -0.2px; }
-.topbar p { margin: 3px 0 0; color: #8a91a2; font-size: 11px; }
+.brand-mark svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.topbar h1 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+.topbar p {
+  margin: 3px 0 0;
+  color: #8a91a2;
+  font-size: 11px;
+}
 
 .theme-toggle {
   display: grid;
@@ -37,9 +51,23 @@
   transition: 0.18s;
 }
 
-.theme-toggle:hover { color: #5d4bd6; border-color: #cdc7f3; background: #f1efff; }
-.theme-toggle svg { width: 15px; grid-area: 1 / 1; fill: none; stroke: currentColor; stroke-width: 1.8; transition: 0.18s; }
-.sun-icon { opacity: 0; transform: rotate(-45deg) scale(0.6); }
+.theme-toggle:hover {
+  color: #5d4bd6;
+  border-color: #cdc7f3;
+  background: #f1efff;
+}
+.theme-toggle svg {
+  width: 15px;
+  grid-area: 1 / 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  transition: 0.18s;
+}
+.sun-icon {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.6);
+}
 
 .status {
   display: flex;
@@ -53,4 +81,9 @@
   font-weight: 700;
 }
 
-.status i { width: 6px; height: 6px; border-radius: 50%; background: #4bb878; }
+.status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4bb878;
+}

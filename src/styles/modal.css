@@ -1,0 +1,62 @@
+.modal[hidden] { display: none; }
+.modal { position: fixed; inset: 0; z-index: 10; display: grid; align-items: end; }
+.modal-backdrop { position: absolute; inset: 0; background: #1f243350; opacity: 0; transition: 0.18s; }
+
+.modal-card {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  border-radius: 17px 17px 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 35px #20243320;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.2s;
+}
+
+.modal.open .modal-backdrop,
+.modal.open .modal-card { opacity: 1; }
+.modal.open .modal-card { transform: translateY(0); }
+.modal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 15px; }
+.modal-header h2 { margin: 2px 0 0; font-size: 17px; }
+.eyebrow.dark { color: #7566d6; }
+
+.close-button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  padding: 0 0 2px;
+  color: #737988;
+  border: 0;
+  border-radius: 8px;
+  background: #f2f3f6;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.close-button:hover { color: #4f5667; background: #e8eaf0; }
+.modal-card > label { display: block; margin: 10px 0 5px; font-size: 10px; font-weight: 700; }
+.modal-card label small { color: #9da2ae; font-weight: 400; }
+
+.modal-card > input {
+  width: 100%;
+  height: 39px;
+  padding: 0 11px;
+  color: #242c3d;
+  border: 1px solid #dfe2e8;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  font-size: 11px;
+}
+
+.modal-card > input:focus { border-color: #7564e9; box-shadow: 0 0 0 3px #6655dc12; }
+.form-error { min-height: 15px; margin: 5px 1px -3px; color: #c93e4b; font-size: 10px; font-weight: 600; line-height: 1.35; }
+.modal-actions { display: grid; grid-template-columns: 1fr 1.35fr; gap: 8px; margin-top: 16px; }
+.modal-actions button { height: 38px; border-radius: 9px; cursor: pointer; font-size: 11px; font-weight: 700; }
+.secondary-button { border: 1px solid #dde0e6; background: #fff; }
+.save-button { color: #fff; border: 0; background: #6654de; box-shadow: 0 5px 12px #6654de30; }

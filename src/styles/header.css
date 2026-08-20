@@ -1,0 +1,56 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  height: 68px;
+  gap: 10px;
+  padding: 11px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e8eaf0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  color: #fff;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #6957e8, #5744d5);
+  box-shadow: 0 6px 14px #6553e633;
+}
+
+.brand-mark svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.topbar h1 { margin: 0; font-size: 16px; line-height: 1.2; letter-spacing: -0.2px; }
+.topbar p { margin: 3px 0 0; color: #8a91a2; font-size: 11px; }
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  color: #626a7b;
+  border: 1px solid #e2e4ea;
+  border-radius: 9px;
+  background: #f7f8fa;
+  cursor: pointer;
+  transition: 0.18s;
+}
+
+.theme-toggle:hover { color: #5d4bd6; border-color: #cdc7f3; background: #f1efff; }
+.theme-toggle svg { width: 15px; grid-area: 1 / 1; fill: none; stroke: currentColor; stroke-width: 1.8; transition: 0.18s; }
+.sun-icon { opacity: 0; transform: rotate(-45deg) scale(0.6); }
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  color: #36805b;
+  border-radius: 99px;
+  background: #eaf8f0;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.status i { width: 6px; height: 6px; border-radius: 50%; background: #4bb878; }

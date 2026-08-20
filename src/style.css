@@ -1,0 +1,8 @@
+@import './styles/base.css';
+@import './styles/header.css';
+@import './styles/state-selector.css';
+@import './styles/result.css';
+@import './styles/history.css';
+@import './styles/custom-ceps.css';
+@import './styles/modal.css';
+@import './styles/themes.css';

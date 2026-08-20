@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "CEP por Estado",
+  "description": "Gere e copie CEPs para testes, separados por estado brasileiro.",
+  "version": "1.1.0",
+  "action": { "default_title": "CEP por Estado", "default_popup": "index.html" },
+  "permissions": ["storage"]
+}

@@ -1,0 +1,31 @@
+import type { State } from './types';
+
+export const states: State[] = [
+  { uf: 'AC', name: 'Acre', min: 69900000, max: 69999999 },
+  { uf: 'AL', name: 'Alagoas', min: 57000000, max: 57999999 },
+  { uf: 'AP', name: 'Amapá', min: 68900000, max: 68999999 },
+  { uf: 'AM', name: 'Amazonas', min: 69000000, max: 69299999 },
+  { uf: 'BA', name: 'Bahia', min: 40000000, max: 48999999 },
+  { uf: 'CE', name: 'Ceará', min: 60000000, max: 63999999 },
+  { uf: 'DF', name: 'Distrito Federal', min: 70000000, max: 72799999 },
+  { uf: 'ES', name: 'Espírito Santo', min: 29000000, max: 29999999 },
+  { uf: 'GO', name: 'Goiás', min: 72800000, max: 76799999 },
+  { uf: 'MA', name: 'Maranhão', min: 65000000, max: 65999999 },
+  { uf: 'MT', name: 'Mato Grosso', min: 78000000, max: 78899999 },
+  { uf: 'MS', name: 'Mato Grosso do Sul', min: 79000000, max: 79999999 },
+  { uf: 'MG', name: 'Minas Gerais', min: 30000000, max: 39999999 },
+  { uf: 'PA', name: 'Pará', min: 66000000, max: 68899999 },
+  { uf: 'PB', name: 'Paraíba', min: 58000000, max: 58999999 },
+  { uf: 'PR', name: 'Paraná', min: 80000000, max: 87999999 },
+  { uf: 'PE', name: 'Pernambuco', min: 50000000, max: 56999999 },
+  { uf: 'PI', name: 'Piauí', min: 64000000, max: 64999999 },
+  { uf: 'RJ', name: 'Rio de Janeiro', min: 20000000, max: 28999999 },
+  { uf: 'RN', name: 'Rio Grande do Norte', min: 59000000, max: 59999999 },
+  { uf: 'RS', name: 'Rio Grande do Sul', min: 90000000, max: 99999999 },
+  { uf: 'RO', name: 'Rondônia', min: 76800000, max: 76999999 },
+  { uf: 'RR', name: 'Roraima', min: 69300000, max: 69399999 },
+  { uf: 'SC', name: 'Santa Catarina', min: 88000000, max: 89999999 },
+  { uf: 'SP', name: 'São Paulo', min: 1000000, max: 19999999 },
+  { uf: 'SE', name: 'Sergipe', min: 49000000, max: 49999999 },
+  { uf: 'TO', name: 'Tocantins', min: 77000000, max: 77999999 }
+];

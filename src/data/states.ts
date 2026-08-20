@@ -1,4 +1,4 @@
-import type { State } from './types';
+import type { State } from '../types';
 
 export const states: State[] = [
   { uf: 'AC', name: 'Acre', min: 69900000, max: 69999999 },

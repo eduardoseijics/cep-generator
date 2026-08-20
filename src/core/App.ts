@@ -1,14 +1,14 @@
-import { states } from './states';
-import { cepCatalog } from './cepCatalog';
-import { CepFormatter } from './utils/CepFormatter';
-import { CepService } from './services/CepService';
-import { StorageService } from './services/StorageService';
-import { Toast } from './components/Toast';
-import { StateSelector } from './components/StateSelector';
-import { HistoryList } from './components/HistoryList';
-import { CustomCepManager } from './components/CustomCepManager';
-import type { CustomCepElements } from './components/CustomCepManager';
-import type { HistoryEntry, State, StoredData, Theme } from './types';
+import { states } from '../data/states';
+import { cepCatalog } from '../data/cepCatalog';
+import { CepFormatter } from '../utils/CepFormatter';
+import { CepService } from '../services/CepService';
+import { StorageService } from '../services/StorageService';
+import { Toast } from '../components/Toast';
+import { StateSelector } from '../components/StateSelector';
+import { HistoryList } from '../components/HistoryList';
+import { CustomCepManager } from '../components/CustomCepManager';
+import type { CustomCepElements } from '../components/CustomCepManager';
+import type { HistoryEntry, State, StoredData, Theme } from '../types';
 
 interface AppElements {
   stateSearch: HTMLInputElement;

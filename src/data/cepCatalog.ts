@@ -1,4 +1,4 @@
-import type { CepCatalog } from './types';
+import type { CepCatalog } from '../types';
 
 // CEPs retrieved from ViaCEP and stored locally for reliable offline generation.
 export const cepCatalog: CepCatalog = {

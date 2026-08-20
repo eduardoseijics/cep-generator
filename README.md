@@ -28,10 +28,11 @@ npm run typecheck
 ## Project structure
 
 - `src/components`: UI components and their interactions
+- `src/core`: application bootstrap and orchestration
+- `src/data`: built-in states and CEP catalog
 - `src/services`: persistence and CEP business rules
 - `src/utils`: data formatting and normalization
 - `src/styles`: component, base, and theme styles
-- `src/App.ts`: application state and orchestration
 - `src/types.ts`: shared TypeScript contracts
 
 ## Build and install

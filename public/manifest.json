@@ -2,7 +2,22 @@
   "manifest_version": 3,
   "name": "Gerador brasileiro para testes",
   "description": "Gere CEP, CPF, CNPJ e cartões de teste offline.",
-  "version": "1.2.0",
-  "action": { "default_title": "Gerador brasileiro para testes", "default_popup": "index.html" },
+  "version": "1.2.1",
+  "action": {
+    "default_title": "Gerador brasileiro para testes",
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
   "permissions": ["storage"]
 }

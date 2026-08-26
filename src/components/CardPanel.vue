@@ -41,7 +41,7 @@ function isSavedCard(value: SavedCard | undefined): value is SavedCard {
     brands.includes(value.brand) &&
     /^\d{15,16}$/.test(value.number) &&
     /^\d{2}\/\d{4}$/.test(value.expiry) &&
-    /^\d{3}$/.test(value.cvv)
+    new RegExp(`^\\d{${value.brand === 'amex' ? 4 : 3}}$`).test(value.cvv)
   );
 }
 async function copy(value: string, key: string, message: string) {

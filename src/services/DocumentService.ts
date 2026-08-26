@@ -15,7 +15,10 @@ export interface GeneratedCard {
  */
 export class DocumentService {
   generateCpf(formatted = true): string {
-    const digits = Array.from({ length: 9 }, () => this.randomDigit());
+    let digits: number[];
+    do {
+      digits = Array.from({ length: 9 }, () => this.randomDigit());
+    } while (digits.every((digit) => digit === digits[0]));
     digits.push(this.cpfDigit(digits));
     digits.push(this.cpfDigit(digits));
     const value = digits.join('');
@@ -49,7 +52,10 @@ export class DocumentService {
       brand,
       number: digits.join(''),
       expiry: this.expiry(),
-      cvv: String(Math.floor(Math.random() * 900) + 100)
+      cvv:
+        brand === 'amex'
+          ? String(Math.floor(Math.random() * 9000) + 1000)
+          : String(Math.floor(Math.random() * 900) + 100)
     };
   }
 

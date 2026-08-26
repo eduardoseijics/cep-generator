@@ -58,6 +58,12 @@ describe('DocumentService', () => {
     expect(service.generateCpf(false)).toMatch(/^\d{11}$/);
   });
 
+  it('não gera CPF com todos os dígitos iguais', () => {
+    Array.from({ length: 100 }, () => service.generateCpf(false)).forEach((cpf) => {
+      expect(new Set(cpf).size).toBeGreaterThan(1);
+    });
+  });
+
   it('gera CNPJ válido com e sem máscara', () => {
     expect(cnpjIsValid(service.generateCnpj(true))).toBe(true);
     expect(service.generateCnpj(false)).toMatch(/^\d{14}$/);
@@ -69,7 +75,7 @@ describe('DocumentService', () => {
       const card = service.generateCard(brand);
       expect(luhnIsValid(card.number)).toBe(true);
       expect(card.number).toHaveLength(brand === 'amex' ? 15 : 16);
-      expect(card.cvv).toMatch(/^\d{3}$/);
+      expect(card.cvv).toMatch(brand === 'amex' ? /^\d{4}$/ : /^\d{3}$/);
       expect(card.expiry).toMatch(/^\d{2}\/\d{4}$/);
     }
   );

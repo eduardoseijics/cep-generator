@@ -2,7 +2,19 @@ import type { StoredData, Theme } from '../types';
 
 const STORAGE_KEY = 'cepGenerator';
 const THEME_STORAGE_KEY = 'cepGeneratorTheme';
-const STORAGE_FIELDS = ['cepHistory', 'selectedUf', 'useFormat', 'useDocumentFormat', 'customCeps', 'theme'];
+const STORAGE_FIELDS = [
+  'cepHistory',
+  'selectedUf',
+  'useFormat',
+  'useDocumentFormat',
+  'customCeps',
+  'theme',
+  'activePanel',
+  'selectedDocumentKind',
+  'documentDigits',
+  'selectedCardBrand',
+  'savedCard'
+];
 
 interface ChromeStorageArea {
   get(keys: string[]): Promise<StoredData>;
@@ -25,7 +37,11 @@ export class StorageService {
         const data = await chromeStorage.get(STORAGE_FIELDS);
         // localStorage é atualizado em toda gravação e evita perda de dados caso
         // o popup seja fechado antes de o Chrome concluir sua própria escrita.
-        return { ...data, ...localData, theme: this.loadThemeFallback() ?? localData.theme ?? data.theme };
+        return {
+          ...data,
+          ...localData,
+          theme: this.loadThemeFallback() ?? localData.theme ?? data.theme
+        };
       } catch {
         // A preferência de tema ainda pode ser recuperada pelo fallback abaixo.
       }
@@ -35,12 +51,13 @@ export class StorageService {
   }
 
   async save(data: StoredData): Promise<void> {
-    this.saveThemeFallback(data.theme);
-    this.saveLocalData(data);
+    const mergedData = { ...this.loadLocalData(), ...data };
+    this.saveThemeFallback(mergedData.theme);
+    this.saveLocalData(mergedData);
     const chromeStorage = getChromeStorage();
     if (chromeStorage) {
       try {
-        await chromeStorage.set(data);
+        await chromeStorage.set(mergedData);
       } catch {
         // A cópia local, feita acima, mantém os dados disponíveis.
       }

@@ -17,6 +17,18 @@ export interface HistoryEntry {
   uf: string;
   name: string;
 }
+
+export type Panel = 'cep' | 'documents' | 'cards';
+export type DocumentKind = 'cpf' | 'cnpj';
+export type CardBrand = 'visa' | 'mastercard' | 'amex' | 'discover';
+
+export interface SavedCard {
+  brand: CardBrand;
+  number: string;
+  expiry: string;
+  cvv: string;
+}
+
 export interface StoredData {
   cepHistory?: HistoryEntry[];
   selectedUf?: string;
@@ -24,6 +36,11 @@ export interface StoredData {
   useDocumentFormat?: boolean;
   customCeps?: CustomCep[];
   theme?: Theme;
+  activePanel?: Panel;
+  selectedDocumentKind?: DocumentKind;
+  documentDigits?: string;
+  selectedCardBrand?: CardBrand;
+  savedCard?: SavedCard;
 }
 export type CepCatalog = Record<string, string[]>;
 export type Theme = 'light' | 'dark';

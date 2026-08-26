@@ -29,7 +29,7 @@
   gap: 1px;
 }
 .history-item strong {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 11px;
   white-space: nowrap;
 }
@@ -59,11 +59,32 @@
   stroke: #9ba0ad;
   stroke-width: 1.7;
 }
-.history-copy { position: relative; width: 15px; height: 15px; }
-.history-copy svg { position: absolute; inset: 0; transition: .18s; }
-.history-check-icon { opacity: 0; transform: scale(.55); }
-.history-copy.copied .history-copy-icon { opacity: 0; transform: scale(.55); }
-.history-copy.copied .history-check-icon { opacity: 1; transform: scale(1); stroke: #5d4bd6; }
+.history-copy {
+  position: relative;
+  width: 15px;
+  height: 15px;
+}
+.history-copy svg {
+  position: absolute;
+  inset: 0;
+  transition: 0.18s;
+}
+.history-item:hover .history-copy-icon {
+  transform: translateY(-1px);
+}
+.history-check-icon {
+  opacity: 0;
+  transform: scale(0.55);
+}
+.history-copy.copied .history-copy-icon {
+  opacity: 0;
+  transform: scale(0.55);
+}
+.history-copy.copied .history-check-icon {
+  opacity: 1;
+  transform: scale(1);
+  stroke: #5d4bd6;
+}
 .history-empty {
   grid-column: 1 / -1;
   border: 1px dashed #dfe1e7;

@@ -18,8 +18,13 @@
   border-color: #2b303c;
   background: #1c2029;
 }
-[data-theme='dark'] .main-tab { color: #aeb5c3; }
-[data-theme='dark'] .main-tab.active { color: #c8c0ff; background: #2d2946; }
+[data-theme='dark'] .main-tab {
+  color: #aeb5c3;
+}
+[data-theme='dark'] .main-tab.active {
+  color: #c8c0ff;
+  background: #2d2946;
+}
 
 [data-theme='dark'] .topbar p,
 [data-theme='dark'] .format-row div span,
@@ -80,8 +85,7 @@
   background: #292d38;
 }
 
-[data-theme='dark'] .history-item.copied,
-[data-theme='dark'] .custom-item button[data-copy].copied {
+[data-theme='dark'] .history-item.copied {
   color: #c8c0ff;
   border-color: #514a79;
   background: #2d2946;
@@ -102,10 +106,6 @@
 [data-theme='dark'] .modal-card {
   color: #edf0f7;
   background: #20242d;
-}
-[data-theme='dark'] .close-button {
-  color: #abb1bf;
-  background: #2d323d;
 }
 [data-theme='dark'] .modal-card > input {
   color: #edf0f7;

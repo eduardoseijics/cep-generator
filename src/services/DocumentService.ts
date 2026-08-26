@@ -1,5 +1,6 @@
-export type DocumentKind = 'cpf' | 'cnpj';
-export type CardBrand = 'visa' | 'mastercard' | 'amex' | 'discover';
+import type { CardBrand } from '../types';
+
+export type { CardBrand, DocumentKind } from '../types';
 
 export interface GeneratedCard {
   brand: CardBrand;
@@ -27,7 +28,9 @@ export class DocumentService {
     digits.push(this.cnpjDigit(digits));
     digits.push(this.cnpjDigit(digits));
     const value = digits.join('');
-    return formatted ? value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5') : value;
+    return formatted
+      ? value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
+      : value;
   }
 
   generateCard(brand: CardBrand): GeneratedCard {
@@ -55,14 +58,21 @@ export class DocumentService {
   }
 
   private cpfDigit(digits: number[]): number {
-    const sum = digits.slice().reverse().reduce((total, digit, index) => total + digit * (index + 2), 0);
+    const sum = digits
+      .slice()
+      .reverse()
+      .reduce((total, digit, index) => total + digit * (index + 2), 0);
     const digit = 11 - (sum % 11);
     return digit >= 10 ? 0 : digit;
   }
 
   private cnpjDigit(digits: number[]): number {
-    const weights = digits.length === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2] : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-    const digit = 11 - (digits.reduce((sum, value, index) => sum + value * weights[index]!, 0) % 11);
+    const weights =
+      digits.length === 12
+        ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+        : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    const digit =
+      11 - (digits.reduce((sum, value, index) => sum + value * weights[index]!, 0) % 11);
     return digit >= 10 ? 0 : digit;
   }
 

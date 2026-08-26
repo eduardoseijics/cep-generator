@@ -4,7 +4,7 @@
   height: 68px;
   gap: 10px;
   padding: 11px 16px;
-  background: #fff;
+  background: #fcfbff;
   border-bottom: 1px solid #e8eaf0;
 }
 
@@ -93,7 +93,7 @@
   gap: 3px;
   padding: 7px 16px;
   border-bottom: 1px solid #e8eaf0;
-  background: #fff;
+  background: #fcfbff;
 }
 
 .main-tab {
@@ -108,4 +108,7 @@
   font-weight: 700;
 }
 
-.main-tab.active { color: #5d4bd6; background: #eeebff; }
+.main-tab.active {
+  color: #5d4bd6;
+  background: #eeebff;
+}

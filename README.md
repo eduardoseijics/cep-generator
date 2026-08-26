@@ -16,6 +16,8 @@ A Vue 3 and TypeScript browser extension for generating and copying Brazilian te
 
 ## Development
 
+See [development guidelines](AGENTS.md) for component boundaries, persistence, formatting, and validation expectations.
+
 ```bash
 npm install
 npm run dev

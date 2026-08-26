@@ -48,7 +48,7 @@
   gap: 1px;
 }
 .custom-info strong {
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: 'SFMono-Regular', Consolas, monospace;
   font-size: 11px;
 }
 .custom-info small {
@@ -75,33 +75,6 @@
 .custom-item button:hover {
   color: #5f4ed8;
   background: #f0edff;
-}
-.custom-item button[data-copy]:hover,
-.custom-item button[data-copy].copied {
-  color: #24815a;
-  background: #eaf8f0;
-}
-.custom-item button[data-copy].copied {
-  transform: scale(0.92);
-}
-.custom-item button[data-copy] {
-  position: relative;
-}
-.custom-item button[data-copy] svg {
-  position: absolute;
-  transition: .18s;
-}
-.custom-item button[data-copy] .check-icon {
-  opacity: 0;
-  transform: scale(.55);
-}
-.custom-item button[data-copy].copied .copy-icon {
-  opacity: 0;
-  transform: scale(.55);
-}
-.custom-item button[data-copy].copied .check-icon {
-  opacity: 1;
-  transform: scale(1);
 }
 .custom-item button:last-child:hover {
   color: #d9525e;

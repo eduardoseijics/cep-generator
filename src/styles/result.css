@@ -42,7 +42,7 @@
 }
 
 .cep-value {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   font-size: 27px;
   font-weight: 700;
   letter-spacing: 1.4px;

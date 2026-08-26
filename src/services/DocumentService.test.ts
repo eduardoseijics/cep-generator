@@ -8,11 +8,17 @@ function cpfIsValid(value: string): boolean {
   const digits = value.replace(/\D/g, '');
   if (digits.length !== 11) return false;
   const calculate = (base: string) => {
-    const sum = [...base].reduce((total, digit, index) => total + Number(digit) * (base.length + 1 - index), 0);
+    const sum = [...base].reduce(
+      (total, digit, index) => total + Number(digit) * (base.length + 1 - index),
+      0
+    );
     const result = (sum * 10) % 11;
     return result === 10 ? 0 : result;
   };
-  return calculate(digits.slice(0, 9)) === Number(digits[9]) && calculate(digits.slice(0, 10)) === Number(digits[10]);
+  return (
+    calculate(digits.slice(0, 9)) === Number(digits[9]) &&
+    calculate(digits.slice(0, 10)) === Number(digits[10])
+  );
 }
 
 function cnpjIsValid(value: string): boolean {
@@ -28,7 +34,10 @@ function cnpjIsValid(value: string): boolean {
     const result = 11 - (sum % 11);
     return result >= 10 ? 0 : result;
   };
-  return calculate(digits.slice(0, 12)) === Number(digits[12]) && calculate(digits.slice(0, 13)) === Number(digits[13]);
+  return (
+    calculate(digits.slice(0, 12)) === Number(digits[12]) &&
+    calculate(digits.slice(0, 13)) === Number(digits[13])
+  );
 }
 
 function luhnIsValid(value: string): boolean {
@@ -54,11 +63,14 @@ describe('DocumentService', () => {
     expect(service.generateCnpj(false)).toMatch(/^\d{14}$/);
   });
 
-  it.each<CardBrand>(['visa', 'mastercard', 'amex', 'discover'])('gera cartão %s com Luhn válido', (brand) => {
-    const card = service.generateCard(brand);
-    expect(luhnIsValid(card.number)).toBe(true);
-    expect(card.number).toHaveLength(brand === 'amex' ? 15 : 16);
-    expect(card.cvv).toMatch(/^\d{3}$/);
-    expect(card.expiry).toMatch(/^\d{2}\/\d{4}$/);
-  });
+  it.each<CardBrand>(['visa', 'mastercard', 'amex', 'discover'])(
+    'gera cartão %s com Luhn válido',
+    (brand) => {
+      const card = service.generateCard(brand);
+      expect(luhnIsValid(card.number)).toBe(true);
+      expect(card.number).toHaveLength(brand === 'amex' ? 15 : 16);
+      expect(card.cvv).toMatch(/^\d{3}$/);
+      expect(card.expiry).toMatch(/^\d{2}\/\d{4}$/);
+    }
+  );
 });

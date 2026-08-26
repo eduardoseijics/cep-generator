@@ -18,9 +18,9 @@ describe('App', () => {
 
     const output = wrapper.get('.document-value');
     const formatted = output.text();
-    await wrapper.get('.document-format input').setValue(false);
+    await wrapper.get('[aria-labelledby="documentsTitle"] .format-row input').setValue(false);
     const unformatted = output.text();
-    await wrapper.get('.document-format input').setValue(true);
+    await wrapper.get('[aria-labelledby="documentsTitle"] .format-row input').setValue(true);
 
     expect(unformatted).toMatch(/^\d{11}$/);
     expect(unformatted).toBe(formatted.replace(/\D/g, ''));
@@ -33,7 +33,7 @@ describe('App', () => {
     await wrapper.get('.document-tabs button:nth-child(2)').trigger('click');
 
     const output = wrapper.get('.document-value');
-    await wrapper.get('.document-format input').setValue(false);
+    await wrapper.get('[aria-labelledby="documentsTitle"] .format-row input').setValue(false);
 
     expect(output.text()).toMatch(/^\d{14}$/);
   });

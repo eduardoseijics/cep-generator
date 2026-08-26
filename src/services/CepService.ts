@@ -1,11 +1,13 @@
 import type { CepCatalog, CustomCep, State } from '../types';
 
 export type CustomCepValidation =
-  | { error: string; state?: never }
-  | { state: State; error?: never };
+  { error: string; state?: never } | { state: State; error?: never };
 
 export class CepService {
-  constructor(private readonly states: State[], private readonly catalog: CepCatalog) {}
+  constructor(
+    private readonly states: State[],
+    private readonly catalog: CepCatalog
+  ) {}
 
   findState(uf?: string): State | undefined {
     return this.states.find((state) => state.uf === uf);

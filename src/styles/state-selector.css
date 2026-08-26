@@ -1,7 +1,7 @@
 .field-group > label {
   display: block;
   margin-bottom: 8px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 .search-wrap {
@@ -27,7 +27,7 @@
   border-radius: 10px;
   outline: none;
   background: #fff;
-  font-size: 12px;
+  font-size: 13px;
   transition: 0.2s;
 }
 
@@ -62,7 +62,7 @@
   background: transparent;
   cursor: pointer;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -89,5 +89,5 @@
   width: 29px;
   height: 22px;
   border-radius: 6px;
-  font-size: 9px;
+  font-size: 10px;
 }

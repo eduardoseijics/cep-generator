@@ -43,7 +43,7 @@
 }
 .modal-header h2 {
   margin: 2px 0 0;
-  font-size: 17px;
+  font-size: 18px;
 }
 .eyebrow.dark {
   color: #7566d6;
@@ -73,7 +73,7 @@
 .modal-card > label {
   display: block;
   margin: 10px 0 5px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
 }
 .modal-card label small {
@@ -90,7 +90,11 @@
   border-radius: 9px;
   outline: none;
   background: #fff;
-  font-size: 11px;
+  font-size: 12px;
+}
+
+.modal-card > input + input {
+  margin-top: 9px;
 }
 
 .modal-card > input:focus {
@@ -101,7 +105,7 @@
   min-height: 15px;
   margin: 5px 1px -3px;
   color: #c93e4b;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -115,7 +119,7 @@
   height: 38px;
   border-radius: 9px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 .secondary-button {

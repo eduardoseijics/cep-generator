@@ -23,17 +23,6 @@
   border-color: #c7c0f3;
   background: #faf9ff;
 }
-.history-item.copied {
-  color: #1f7a50;
-  border-color: #bce6cf;
-  background: #eaf8f0;
-  transform: scale(0.98);
-}
-.history-item.copied small,
-.history-item.copied svg {
-  color: #3b8b64;
-  stroke: #3b8b64;
-}
 .history-item > span:nth-child(2) {
   display: grid;
   min-width: 0;
@@ -41,13 +30,13 @@
 }
 .history-item strong {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
 }
 .history-item small {
   overflow: hidden;
   color: #999eaa;
-  font-size: 9px;
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -59,6 +48,22 @@
   stroke: #9ba0ad;
   stroke-width: 1.7;
 }
+.history-item > span:last-child {
+  display: grid;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+.history-item > span:last-child svg {
+  width: 15px;
+  fill: none;
+  stroke: #9ba0ad;
+  stroke-width: 1.7;
+}
+.history-copy { position: relative; width: 15px; height: 15px; }
+.history-copy svg { position: absolute; inset: 0; transition: .18s; }
+.history-check-icon { opacity: 0; transform: scale(.55); }
+.history-copy.copied .history-copy-icon { opacity: 0; transform: scale(.55); }
+.history-copy.copied .history-check-icon { opacity: 1; transform: scale(1); stroke: #5d4bd6; }
 .history-empty {
   grid-column: 1 / -1;
   border: 1px dashed #dfe1e7;

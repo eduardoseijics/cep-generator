@@ -14,6 +14,13 @@
   border-color: #2b303c;
 }
 
+[data-theme='dark'] .main-tabs {
+  border-color: #2b303c;
+  background: #1c2029;
+}
+[data-theme='dark'] .main-tab { color: #aeb5c3; }
+[data-theme='dark'] .main-tab.active { color: #c8c0ff; background: #2d2946; }
+
 [data-theme='dark'] .topbar p,
 [data-theme='dark'] .format-row div span,
 [data-theme='dark'] .section-title span,
@@ -75,9 +82,9 @@
 
 [data-theme='dark'] .history-item.copied,
 [data-theme='dark'] .custom-item button[data-copy].copied {
-  color: #71d5a0;
-  border-color: #35634b;
-  background: #203c30;
+  color: #c8c0ff;
+  border-color: #514a79;
+  background: #2d2946;
 }
 
 [data-theme='dark'] .history-empty,

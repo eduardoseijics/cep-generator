@@ -21,6 +21,7 @@ export interface StoredData {
   cepHistory?: HistoryEntry[];
   selectedUf?: string;
   useFormat?: boolean;
+  useDocumentFormat?: boolean;
   customCeps?: CustomCep[];
   theme?: Theme;
 }

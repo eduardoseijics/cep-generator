@@ -4,93 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f7f8fa" />
-    <title>CEP por Estado</title>
+    <title>Gerador brasileiro para testes</title>
   </head>
   <body>
-    <main class="app">
-      <header class="topbar">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        </div>
-        <div>
-          <h1>CEP por Estado</h1>
-          <p>Gerador rápido para testes</p>
-        </div>
-        <button id="themeToggle" class="theme-toggle" type="button" title="Tema escuro" aria-label="Ativar tema escuro">
-          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>
-          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
-        </button>
-        <span class="status"><i></i> Offline</span>
-      </header>
-
-      <section class="content">
-        <div class="field-group">
-          <label for="stateSearch">Escolha um estado</label>
-          <div class="search-wrap">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-            <input id="stateSearch" type="search" placeholder="Buscar por nome ou UF..." autocomplete="off" />
-          </div>
-          <div id="stateList" class="state-list" role="listbox" aria-label="Estados brasileiros"></div>
-        </div>
-
-        <section class="result-card" aria-live="polite">
-          <div class="result-heading">
-            <div><span class="eyebrow">CEP GERADO</span><strong id="selectedState">São Paulo · SP</strong></div>
-            <span id="stateBadge" class="state-badge">SP</span>
-          </div>
-          <div class="cep-row">
-            <span id="generatedCep" class="cep-value">01310-100</span>
-            <button id="copyButton" class="icon-button" type="button" title="Copiar CEP" aria-label="Copiar CEP">
-              <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <svg class="check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
-            </button>
-          </div>
-          <button id="generateButton" class="primary-button" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v6h-6"/></svg>Gerar novo CEP
-          </button>
-        </section>
-
-        <div class="format-row">
-          <div><strong>Usar formatação</strong><span>Exibir como 00000-000</span></div>
-          <label class="switch" aria-label="Alternar formatação do CEP"><input id="formatToggle" type="checkbox" checked /><span></span></label>
-        </div>
-
-        <section class="history-section">
-          <div class="section-title"><h2>Gerados recentemente</h2><button id="clearHistory" type="button">Limpar</button></div>
-          <div id="historyList" class="history-list"></div>
-        </section>
-
-        <section class="custom-section">
-          <div class="section-title">
-            <div><h2>Meus CEPs</h2><span id="customCount">0 salvos</span></div>
-            <button id="addCepButton" class="add-button" type="button"><b>+</b> Adicionar</button>
-          </div>
-          <div id="customList" class="custom-list"></div>
-        </section>
-      </section>
-      <footer>Os CEPs seguem as faixas de cada UF e são destinados a testes.</footer>
-      <div id="toast" class="toast" role="status">CEP copiado!</div>
-
-      <div id="modal" class="modal" hidden>
-        <div class="modal-backdrop" data-close-modal></div>
-        <form id="cepForm" class="modal-card">
-          <div class="modal-header">
-            <div><span class="eyebrow dark">CEP PERSONALIZADO</span><h2 id="modalTitle">Adicionar CEP</h2></div>
-            <button class="close-button" type="button" data-close-modal aria-label="Fechar">×</button>
-          </div>
-          <input id="editId" type="hidden" />
-          <label for="customCep">CEP</label>
-          <input id="customCep" inputmode="numeric" maxlength="9" placeholder="00000-000" required />
-          <p id="cepError" class="form-error"></p>
-          <label for="customLabel">Identificação <small>(opcional)</small></label>
-          <input id="customLabel" maxlength="35" placeholder="Ex.: Escritório, cliente..." />
-          <div class="modal-actions">
-            <button class="secondary-button" type="button" data-close-modal>Cancelar</button>
-            <button class="save-button" type="submit">Salvar CEP</button>
-          </div>
-        </form>
-      </div>
-    </main>
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

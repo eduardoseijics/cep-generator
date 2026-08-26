@@ -1,6 +1,6 @@
 # CEP by State
 
-A TypeScript browser extension for generating and copying real Brazilian postal codes grouped by state. It includes an offline catalog with seven CEPs per state, light and dark themes, recent history, and locally stored custom CEPs with automatic state detection.
+A Vue 3 and TypeScript browser extension for generating and copying Brazilian test data. It includes CEPs grouped by state, CPF, CNPJ, and card numbers with expiry dates and CVVs.
 
 ## Features
 
@@ -11,6 +11,8 @@ A TypeScript browser extension for generating and copying real Brazilian postal 
 - Recent CEP history
 - Formatted and unformatted output
 - Persistent light and dark themes
+- Valid CPF and CNPJ generation, with check digits
+- Visa, Mastercard, American Express, and Discover test card generation with Luhn validation
 
 ## Development
 
@@ -56,7 +58,7 @@ The built-in catalog was retrieved from ViaCEP and works offline. Custom CEPs, h
 
 ## Português (Brasil)
 
-Extensão de navegador em TypeScript para gerar e copiar CEPs reais separados por estado. Possui um catálogo offline com sete CEPs por UF, temas claro e escuro, histórico recente e cadastro de CEPs personalizados com identificação automática do estado.
+Extensão de navegador em Vue 3 e TypeScript para gerar e copiar dados brasileiros de teste. Além de CEPs separados por estado, gera CPF, CNPJ e cartões com validade e CVV.
 
 ### Funcionalidades
 
@@ -67,6 +69,8 @@ Extensão de navegador em TypeScript para gerar e copiar CEPs reais separados po
 - Histórico de CEPs recentes
 - Exibição com ou sem formatação
 - Preferência persistente de tema claro ou escuro
+- Geração de CPF e CNPJ válidos, com dígitos verificadores
+- Cartões de teste Visa, Mastercard, American Express e Discover, validados por Luhn
 
 ### Desenvolvimento
 

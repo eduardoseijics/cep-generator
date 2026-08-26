@@ -51,7 +51,7 @@ button {
   height: 29px;
   flex: 0 0 auto;
   border-radius: 7px;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .section-title {
@@ -63,7 +63,7 @@ button {
 
 .section-title h2 {
   margin: 0;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .section-title button {
@@ -72,7 +72,7 @@ button {
   color: #8173d8;
   background: none;
   cursor: pointer;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -82,7 +82,7 @@ button {
   padding: 13px;
   color: #949aa8;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 footer {
@@ -90,7 +90,7 @@ footer {
   color: #a0a5b0;
   border-top: 1px solid #e8eaf0;
   text-align: center;
-  font-size: 8px;
+  font-size: 9px;
 }
 
 .toast {
@@ -102,7 +102,7 @@ footer {
   border-radius: 8px;
   background: #242938;
   box-shadow: 0 7px 20px #0003;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   opacity: 0;
   pointer-events: none;

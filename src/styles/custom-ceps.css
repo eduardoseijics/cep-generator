@@ -13,7 +13,7 @@
 }
 .custom-section .section-title span {
   color: #999eaa;
-  font-size: 8px;
+  font-size: 10px;
 }
 .add-button {
   display: flex;
@@ -49,12 +49,12 @@
 }
 .custom-info strong {
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 10px;
+  font-size: 11px;
 }
 .custom-info small {
   overflow: hidden;
   color: #959aa7;
-  font-size: 8px;
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -84,6 +84,25 @@
 .custom-item button[data-copy].copied {
   transform: scale(0.92);
 }
+.custom-item button[data-copy] {
+  position: relative;
+}
+.custom-item button[data-copy] svg {
+  position: absolute;
+  transition: .18s;
+}
+.custom-item button[data-copy] .check-icon {
+  opacity: 0;
+  transform: scale(.55);
+}
+.custom-item button[data-copy].copied .copy-icon {
+  opacity: 0;
+  transform: scale(.55);
+}
+.custom-item button[data-copy].copied .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
 .custom-item button:last-child:hover {
   color: #d9525e;
   background: #fff0f1;
@@ -102,5 +121,5 @@
   border: 1px dashed #dadde4;
   border-radius: 9px;
   text-align: center;
-  font-size: 9px;
+  font-size: 10px;
 }

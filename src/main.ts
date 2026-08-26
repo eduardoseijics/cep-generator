@@ -1,7 +1,5 @@
+import { createApp } from 'vue';
 import './style.css';
-import { App } from './core/App';
+import App from './App.vue';
 
-const app = new App();
-app.init().catch((error: unknown) => {
-  console.error('Falha ao iniciar a extensão:', error);
-});
+createApp(App).mount('#app');

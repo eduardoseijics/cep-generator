@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Gerador brasileiro para testes",
+  "name": "Gerador de CEP, CPF, CNPJ e Cartão",
   "description": "Gere CEP, CPF, CNPJ e cartões de teste offline.",
   "version": "1.2.1",
   "action": {

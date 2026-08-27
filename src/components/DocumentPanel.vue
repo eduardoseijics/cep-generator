@@ -4,6 +4,7 @@ import { DocumentService } from '../services/DocumentService';
 import { StorageService } from '../services/StorageService';
 import type { DocumentKind } from '../types';
 import CopyButton from './CopyButton.vue';
+import FormatToggle from './FormatToggle.vue';
 
 const emit = defineEmits<{ feedback: [message: string] }>();
 const service = new DocumentService();
@@ -78,11 +79,121 @@ onMounted(async () => {
         Gerar novo {{ kind.toUpperCase() }}
       </button>
     </section>
-    <div class="format-row">
-      <div>
-        <strong>Usar máscara</strong><span>{{ hint }}</span>
-      </div>
-      <label class="switch"><input v-model="useFormat" type="checkbox" /><span /></label>
-    </div>
+    <FormatToggle v-model="useFormat" title="Usar máscara" :hint="hint" />
   </section>
 </template>
+
+<style scoped>
+.panel-intro {
+  margin: 2px 0 13px;
+}
+.panel-intro h2 {
+  margin: 0;
+  font-size: 16px;
+}
+.panel-intro p {
+  margin: 4px 0 0;
+  color: #9298a7;
+  font-size: 12px;
+}
+.document-tabs {
+  display: flex;
+  gap: 6px;
+}
+.document-tab {
+  flex: 1;
+  height: 31px;
+  color: #687084;
+  border: 1px solid #e0e2e8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.document-tab.active {
+  color: #5d4bd6;
+  border-color: #cfc8fa;
+  background: #f0eeff;
+  box-shadow: inset 0 0 0 1px #cfc8fa;
+}
+.document-card {
+  margin-top: 8px;
+  padding: 14px;
+  color: #fff;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(130deg, #6251de 0%, #7767ea 100%);
+  box-shadow: 0 8px 20px #5f4fda2d;
+}
+.document-heading {
+  color: #dcd7ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+.document-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 7px 0 11px;
+}
+.document-value {
+  overflow: hidden;
+  color: #fff;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.document-copy {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  color: #fff;
+  border-color: #ffffff3d;
+  background: #ffffff17;
+}
+.document-copy.copied,
+.document-copy.copied:hover {
+  color: #5d4bd6;
+  border-color: #cfc8fa;
+  background: #f0eeff;
+}
+.document-copy:not(.copied):hover .copy-icon {
+  transform: translateY(-2px);
+}
+.document-copy.copied:hover .check-icon {
+  transform: translateY(-1px) scale(1);
+}
+.document-generate {
+  width: 100%;
+  height: 34px;
+  color: #5d4bd6;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.document-generate:hover {
+  background: #f8f7ff;
+}
+[data-theme='dark'] .document-tab {
+  color: #b4bac8;
+  border-color: #303541;
+  background: #20242d;
+}
+[data-theme='dark'] .document-tab.active {
+  color: #c8c0ff;
+  border-color: #514a79;
+  background: #2d2946;
+}
+[data-theme='dark'] .panel-intro p {
+  color: #929aab;
+}
+</style>

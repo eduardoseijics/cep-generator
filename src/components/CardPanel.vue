@@ -3,6 +3,8 @@ import { onMounted, ref, watch } from 'vue';
 import { DocumentService } from '../services/DocumentService';
 import { StorageService } from '../services/StorageService';
 import type { CardBrand, SavedCard } from '../types';
+import CardBrandLogo from './CardBrandLogo.vue';
+import CardDetailCopyIcon from './CardDetailCopyIcon.vue';
 import CopyButton from './CopyButton.vue';
 
 const emit = defineEmits<{ feedback: [message: string] }>();
@@ -18,16 +20,6 @@ const labels: Record<CardBrand, string> = {
 const brand = ref<CardBrand>('visa');
 const card = ref(service.generateCard('visa'));
 const copied = ref('');
-const detailCopyIcon =
-  '<svg class="detail-copy-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"/></svg><svg class="detail-check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
-const brandIcons: Record<CardBrand, string> = {
-  visa: '<svg class="brand-logo visa-brand-logo" viewBox="0 0 72 28"><text x="2" y="22" fill="#1434cb" font-family="Arial" font-size="23" font-style="italic" font-weight="900">VISA</text></svg>',
-  mastercard:
-    '<svg class="brand-logo" viewBox="0 0 52 32"><circle cx="18" cy="16" r="13" fill="#eb001b"/><circle cx="34" cy="16" r="13" fill="#f79e1b"/><path d="M26 4.4a13 13 0 0 1 0 23.2 13 13 0 0 1 0-23.2Z" fill="#ff5f00"/></svg>',
-  amex: '<svg class="brand-logo" viewBox="0 0 58 30"><rect x="1" y="2" width="56" height="26" rx="3" fill="#2679bd"/><text x="6" y="21" fill="#fff" font-family="Arial" font-size="13" font-weight="900">AMEX</text></svg>',
-  discover:
-    '<svg class="brand-logo discover-brand-logo" viewBox="0 0 76 32"><rect x="1" y="2" width="74" height="28" rx="4" fill="#fff"/><text x="6" y="19" fill="#252525" font-family="Arial" font-size="10" font-style="italic" font-weight="900">DISCOVER</text><path d="M6 25h64" stroke="#f58220" stroke-linecap="round" stroke-width="3"/></svg>'
-};
 function generate() {
   card.value = service.generateCard(brand.value);
 }
@@ -85,8 +77,9 @@ onMounted(async () => {
         type="button"
         :aria-label="labels[item]"
         @click="selectBrand(item)"
-        v-html="brandIcons[item]"
-      />
+      >
+        <CardBrandLogo :brand="item" />
+      </button>
     </div>
     <section class="document-card card-result" aria-live="polite">
       <div class="document-heading">{{ labels[brand] }} · CARTÃO DE TESTE</div>
@@ -107,17 +100,186 @@ onMounted(async () => {
           @click="copy(card.expiry, 'expiry', 'Validade copiada!')"
         >
           <span>VALIDADE</span><strong>{{ card.expiry }}</strong
-          ><span v-html="detailCopyIcon" /></button
+          ><CardDetailCopyIcon /></button
         ><button
           type="button"
           :class="{ copied: copied === 'cvv' }"
           @click="copy(card.cvv, 'cvv', 'CVV copiado!')"
         >
           <span>CVV</span><strong>{{ card.cvv }}</strong
-          ><span v-html="detailCopyIcon" />
+          ><CardDetailCopyIcon />
         </button>
       </div>
       <button class="document-generate" type="button" @click="generate">Gerar novo cartão</button>
     </section>
   </section>
 </template>
+
+<style scoped>
+.panel-intro {
+  margin: 2px 0 13px;
+}
+.panel-intro h2 {
+  margin: 0;
+  font-size: 16px;
+}
+.panel-intro p {
+  margin: 4px 0 0;
+  color: #9298a7;
+  font-size: 12px;
+}
+.card-brands {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.card-brand {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  height: 38px;
+  padding: 4px;
+  color: #687084;
+  border: 1px solid #e0e2e8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.card-brand.selected {
+  color: #5d4bd6;
+  border-color: #cfc8fa;
+  background: #f0eeff;
+  box-shadow: inset 0 0 0 1px #cfc8fa;
+}
+.document-card {
+  margin-top: 8px;
+  padding: 14px;
+  color: #fff;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(130deg, #6251de 0%, #7767ea 100%);
+  box-shadow: 0 8px 20px #5f4fda2d;
+}
+.document-heading {
+  color: #dcd7ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+.document-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 7px 0 11px;
+}
+.document-value {
+  overflow: hidden;
+  color: #fff;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.document-copy {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  color: #fff;
+  border-color: #ffffff3d;
+  background: #ffffff17;
+}
+.document-copy.copied,
+.document-copy.copied:hover {
+  color: #5d4bd6;
+  border-color: #cfc8fa;
+  background: #f0eeff;
+}
+.document-copy:not(.copied):hover .copy-icon {
+  transform: translateY(-2px);
+}
+.document-copy.copied:hover .check-icon {
+  transform: translateY(-1px) scale(1);
+}
+.card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin: 0 0 12px;
+}
+.card-details button {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  padding: 11px 12px;
+  color: #fff;
+  border: 1px solid #ffffff2b;
+  border-radius: 9px;
+  background: #ffffff14;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.18s;
+}
+.card-details button:hover {
+  border-color: #ffffff66;
+  background: #ffffff24;
+}
+.card-details button:not(.copied):hover .detail-copy-icon {
+  transform: translateY(-1px);
+}
+.card-details span {
+  color: #dcd7ff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+.card-details strong {
+  color: #fff;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.card-details button.copied {
+  border-color: #ffffff66;
+  background: #ffffff2c;
+}
+.card-details button.copied .detail-copy-icon {
+  opacity: 0;
+  transform: scale(0.55);
+}
+.card-details button.copied .detail-check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+.document-generate {
+  width: 100%;
+  height: 34px;
+  color: #5d4bd6;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.document-generate:hover {
+  background: #f8f7ff;
+}
+[data-theme='dark'] .card-brand {
+  color: #b4bac8;
+  border-color: #303541;
+  background: #20242d;
+}
+[data-theme='dark'] .card-brand.selected {
+  color: #c8c0ff;
+  border-color: #514a79;
+  background: #2d2946;
+}
+[data-theme='dark'] .panel-intro p {
+  color: #929aab;
+}
+</style>

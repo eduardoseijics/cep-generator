@@ -27,7 +27,7 @@ Estas regras se aplicam a contribuições humanas e automatizadas.
 - Reutilize classes e variáveis visuais existentes antes de criar novas variações.
 - Preserve os dois temas ao alterar cores e inclua o seletor `[data-theme='dark']` quando necessário.
 - Estados interativos devem prever `hover`, `focus-visible`, `active` e, quando aplicável, `.copied`.
-- Não use estilos inline; mantenha o estilo nos arquivos de `src/styles/`.
+- Mantenha estilos específicos em blocos `<style scoped>` no próprio componente. Reserve `src/styles/` para fundação, temas e estilos realmente compartilhados.
 
 ## Estado e armazenamento
 

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 const props = defineProps<{ modelValue: boolean; title: string; hint: string }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
+const inputId = `format-toggle-${crypto.randomUUID()}`;
 </script>
 
 <template>
   <div class="format-row">
-    <div>
-      <strong>{{ title }}</strong
-      ><span>{{ hint }}</span>
-    </div>
+    <label :for="inputId"
+      ><strong>{{ title }}</strong
+      ><span>{{ hint }}</span></label
+    >
     <label class="switch">
       <input
+        :id="inputId"
         :checked="props.modelValue"
         type="checkbox"
         @change="emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
@@ -32,6 +34,10 @@ const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
   background: #fff;
 }
 .format-row div {
+  display: grid;
+  gap: 2px;
+}
+.format-row > label:first-child {
   display: grid;
   gap: 2px;
 }
@@ -73,6 +79,10 @@ const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
 }
 .switch input:checked + span::after {
   transform: translateX(15px);
+}
+.switch input:focus-visible + span {
+  outline: 3px solid #7564e9;
+  outline-offset: 3px;
 }
 [data-theme='dark'] .format-row {
   border-color: #303541;

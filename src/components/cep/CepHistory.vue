@@ -41,8 +41,13 @@ async function copy(item: HistoryEntry): Promise<void> {
           ><strong>{{ format(item.cep) }}</strong
           ><small>{{ item.name }}</small></span
         ><span class="history-copy" :class="{ copied: copied === item.cep }"
-          ><span class="history-copy-icon" aria-hidden="true" />
-          <span class="history-check-icon" aria-hidden="true" />
+          ><svg class="history-copy-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1" />
+          </svg>
+          <svg class="history-check-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m5 12 4 4L19 6" />
+          </svg>
         </span>
       </button>
       <p v-if="!history.length" class="history-empty">Seus últimos CEPs aparecerão aqui.</p>
@@ -96,32 +101,26 @@ async function copy(item: HistoryEntry): Promise<void> {
   margin-left: auto;
   flex: 0 0 auto;
 }
-.history-copy-icon,
-.history-check-icon {
-  position: absolute;
-  inset: 0;
-  width: 15px;
-  height: 15px;
-  background: #9ba0ad;
-  transition: 0.18s;
-}
 .history-copy {
   position: relative;
   width: 15px;
   height: 15px;
 }
-.history-copy-icon {
-  mask: url('../../assets/icons/copy.svg') center / contain no-repeat;
-  -webkit-mask: url('../../assets/icons/copy.svg') center / contain no-repeat;
-}
-.history-check-icon {
-  mask: url('../../assets/icons/check.svg') center / contain no-repeat;
-  -webkit-mask: url('../../assets/icons/check.svg') center / contain no-repeat;
-  opacity: 0;
-  transform: scale(0.55);
+.history-copy svg {
+  position: absolute;
+  inset: 0;
+  width: 15px;
+  fill: none;
+  stroke: #9ba0ad;
+  stroke-width: 1.7;
+  transition: 0.18s;
 }
 .history-item:hover .history-copy-icon {
   transform: translateY(-1px);
+}
+.history-check-icon {
+  opacity: 0;
+  transform: scale(0.55);
 }
 .history-copy.copied .history-copy-icon {
   opacity: 0;
@@ -130,7 +129,7 @@ async function copy(item: HistoryEntry): Promise<void> {
 .history-copy.copied .history-check-icon {
   opacity: 1;
   transform: scale(1);
-  background: #5d4bd6;
+  stroke: #5d4bd6;
 }
 .history-empty {
   grid-column: 1 / -1;

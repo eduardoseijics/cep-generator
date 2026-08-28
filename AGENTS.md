@@ -9,6 +9,21 @@ Estas regras se aplicam a contribuições humanas e automatizadas.
 - Extraia elementos reutilizáveis (por exemplo, cabeçalho, cópia, modal ou seletor) antes de duplicar template, animação ou lógica.
 - Prefira `script setup` com TypeScript e `defineProps`/`defineEmits` tipados.
 
+## Organização e modularização
+
+- Mantenha funções pequenas, coesas e com uma única responsabilidade.
+- Como referência, funções com mais de 20–30 linhas devem ser avaliadas para extração, mas o tamanho sozinho não justifica uma refatoração.
+- Evite funções com muitos níveis de indentação. Prefira retornos antecipados para reduzir aninhamentos.
+- Separe regras de negócio, acesso a dados, persistência e apresentação.
+- Componentes Vue devem coordenar a interface; regras reutilizáveis ou complexas devem ficar em services, composables ou funções utilitárias.
+- Extraia componentes apenas quando houver uma responsabilidade visual clara, reutilização ou ganho real de legibilidade e testabilidade.
+- Prefira composição a herança.
+- Prefira funções puras para transformação e validação de dados.
+- Evite classes quando não houver estado, identidade ou comportamento que justifique orientação a objetos.
+- Aplique os princípios SOLID de forma pragmática, sem criar interfaces, camadas ou abstrações para implementações únicas sem necessidade concreta.
+- Não aplique limites de linhas ou regras de Object Calisthenics de maneira rígida.
+- Não mova código para outro arquivo apenas para reduzir o tamanho do arquivo original.
+
 ## Estilo de código
 
 - Use Prettier como fonte de verdade: não formate manualmente contra o resultado de `npm run format`.

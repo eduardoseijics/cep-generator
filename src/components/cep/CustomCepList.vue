@@ -40,9 +40,23 @@ function stateName(uf: string): string {
           :value="format(item.cep)"
           label="Copiar CEP"
           success-message="CEP copiado!"
+          variant="compact"
           @feedback="emit('feedback', $event)"
-        /><button type="button" aria-label="Editar CEP" @click="emit('edit', item)">✎</button
-        ><button type="button" aria-label="Excluir CEP" @click="emit('remove', item.id)">×</button>
+        /><button
+          class="custom-action"
+          type="button"
+          aria-label="Editar CEP"
+          @click="emit('edit', item)"
+        >
+          ✎</button
+        ><button
+          class="custom-action"
+          type="button"
+          aria-label="Excluir CEP"
+          @click="emit('remove', item.id)"
+        >
+          ×
+        </button>
       </div>
       <p v-if="!customCeps.length" class="custom-empty">
         Adicione CEPs que você usa com frequência.
@@ -106,7 +120,7 @@ function stateName(uf: string): string {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.custom-item button {
+.custom-action {
   display: grid;
   place-items: center;
   width: 26px;
@@ -118,11 +132,11 @@ function stateName(uf: string): string {
   background: transparent;
   cursor: pointer;
 }
-.custom-item button:hover {
+.custom-action:hover {
   color: #5f4ed8;
   background: #f0edff;
 }
-.custom-item button:last-child:hover {
+.custom-action:last-child:hover {
   color: #d9525e;
   background: #fff0f1;
 }

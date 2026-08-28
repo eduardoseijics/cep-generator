@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const props = defineProps<{ value: string; label: string; successMessage: string }>();
+const props = defineProps<{
+  value: string;
+  label: string;
+  successMessage: string;
+  variant?: 'default' | 'compact';
+}>();
 const emit = defineEmits<{ feedback: [message: string] }>();
 const copied = ref(false);
 
@@ -20,14 +25,17 @@ async function copy(): Promise<void> {
 <template>
   <button
     class="icon-button"
-    :class="{ copied }"
+    :class="[{ copied }, props.variant === 'compact' && 'compact']"
     type="button"
     :title="label"
     :aria-label="label"
     @click="copy"
   >
-    <span class="copy-icon" aria-hidden="true" />
-    <span class="check-icon" aria-hidden="true" />
+    <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1" />
+    </svg>
+    <svg class="check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
   </button>
 </template>
 
@@ -49,21 +57,16 @@ async function copy(): Promise<void> {
   background: #ffffff2a;
   transform: translateY(-1px);
 }
-.icon-button .copy-icon,
-.icon-button .check-icon {
+.icon-button svg {
   position: absolute;
   width: 17px;
   height: 17px;
-  background: currentColor;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
   transition: 0.18s;
 }
-.copy-icon {
-  mask: url('../assets/icons/copy.svg') center / contain no-repeat;
-  -webkit-mask: url('../assets/icons/copy.svg') center / contain no-repeat;
-}
 .check-icon {
-  mask: url('../assets/icons/check.svg') center / contain no-repeat;
-  -webkit-mask: url('../assets/icons/check.svg') center / contain no-repeat;
   opacity: 0;
   transform: scale(0.5);
 }
@@ -79,5 +82,26 @@ async function copy(): Promise<void> {
 .icon-button.copied .check-icon {
   opacity: 1;
   transform: scale(1);
+}
+.icon-button.compact {
+  width: 26px;
+  height: 26px;
+  color: #8c92a0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+}
+.icon-button.compact:hover {
+  color: #5f4ed8;
+  background: #f0edff;
+  transform: none;
+}
+.icon-button.compact svg {
+  width: 13px;
+  height: 13px;
+}
+.icon-button.compact.copied {
+  color: #5d4bd6;
+  background: #f0edff;
 }
 </style>

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentService } from './DocumentService';
+import { documentService } from './DocumentService';
 import type { CardBrand } from './DocumentService';
 
-const service = new DocumentService();
+const service = documentService;
 
 function cpfIsValid(value: string): boolean {
   const digits = value.replace(/\D/g, '');

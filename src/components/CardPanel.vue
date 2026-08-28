@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
-import { DocumentService } from '../services/DocumentService';
+import { documentService } from '../services/DocumentService';
 import { StorageService } from '../services/StorageService';
 import type { CardBrand, SavedCard } from '../types';
 import CardBrandLogo from './CardBrandLogo.vue';
@@ -8,7 +8,7 @@ import CardDetailCopyIcon from './CardDetailCopyIcon.vue';
 import CopyButton from './CopyButton.vue';
 
 const emit = defineEmits<{ feedback: [message: string] }>();
-const service = new DocumentService();
+const service = documentService;
 const storage = new StorageService();
 const brands: CardBrand[] = ['visa', 'mastercard', 'amex', 'discover'];
 const labels: Record<CardBrand, string> = {
@@ -20,10 +20,13 @@ const labels: Record<CardBrand, string> = {
 const brand = ref<CardBrand>('visa');
 const card = ref(service.generateCard('visa'));
 const copied = ref('');
-function generate() {
+let hasInteracted = false;
+function generate(hasUserInteraction = false) {
+  hasInteracted ||= hasUserInteraction;
   card.value = service.generateCard(brand.value);
 }
 function selectBrand(nextBrand: CardBrand) {
+  hasInteracted = true;
   brand.value = nextBrand;
   generate();
 }
@@ -50,6 +53,7 @@ watch(brand, (value) => void storage.save({ selectedCardBrand: value }));
 watch(card, (value) => void storage.save({ savedCard: value }));
 onMounted(async () => {
   const saved = await storage.load();
+  if (hasInteracted) return;
   if (isSavedCard(saved.savedCard)) {
     brand.value = saved.savedCard.brand;
     card.value = saved.savedCard;
@@ -100,17 +104,19 @@ onMounted(async () => {
           @click="copy(card.expiry, 'expiry', 'Validade copiada!')"
         >
           <span>VALIDADE</span><strong>{{ card.expiry }}</strong
-          ><CardDetailCopyIcon /></button
+          ><CardDetailCopyIcon :copied="copied === 'expiry'" /></button
         ><button
           type="button"
           :class="{ copied: copied === 'cvv' }"
           @click="copy(card.cvv, 'cvv', 'CVV copiado!')"
         >
           <span>CVV</span><strong>{{ card.cvv }}</strong
-          ><CardDetailCopyIcon />
+          ><CardDetailCopyIcon :copied="copied === 'cvv'" />
         </button>
       </div>
-      <button class="document-generate" type="button" @click="generate">Gerar novo cartão</button>
+      <button class="document-generate" type="button" @click="generate(true)">
+        Gerar novo cartão
+      </button>
     </section>
   </section>
 </template>

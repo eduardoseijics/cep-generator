@@ -25,10 +25,11 @@ const editingCustom = ref<CustomCep>();
 const modalOpen = ref(false);
 const formError = ref('');
 const ready = ref(false);
+let hasInteracted = false;
 const selectedState = computed(() => service.getState(selectedUf.value));
 const formattedCep = computed(() => CepFormatter.format(currentCep.value, useFormat.value));
 
-function persist(): Promise<void> {
+function persist(): Promise<boolean> {
   return storage.save({
     selectedUf: selectedUf.value,
     cepHistory: history.value,
@@ -37,6 +38,7 @@ function persist(): Promise<void> {
   });
 }
 function generate(): void {
+  hasInteracted = true;
   currentCep.value = service.generate(selectedUf.value, customCeps.value, currentCep.value);
   history.value = [
     { cep: currentCep.value, uf: selectedUf.value, name: selectedState.value.name },
@@ -49,10 +51,17 @@ function selectState(uf: string): void {
   generate();
 }
 function clearHistory(): void {
+  hasInteracted = true;
   history.value = [];
   void persist();
 }
+function updateFormat(value: boolean): void {
+  hasInteracted = true;
+  useFormat.value = value;
+  void persist();
+}
 function openModal(item?: CustomCep): void {
+  hasInteracted = true;
   editingCustom.value = item;
   formError.value = '';
   modalOpen.value = true;
@@ -82,6 +91,7 @@ function saveCustom(value: string, label: string): void {
   emit('feedback', editingId ? 'CEP atualizado!' : 'CEP adicionado!');
 }
 function removeCustom(id: string): void {
+  hasInteracted = true;
   customCeps.value = customCeps.value.filter((item) => item.id !== id);
   void persist();
   emit('feedback', 'CEP excluído');
@@ -92,6 +102,7 @@ watch([selectedUf, useFormat], () => {
 });
 onMounted(async () => {
   const saved = await storage.load();
+  if (hasInteracted) return;
   selectedUf.value = service.findState(saved.selectedUf)?.uf || 'SP';
   history.value = saved.cepHistory?.slice(0, 4) || [];
   customCeps.value = saved.customCeps || [];
@@ -109,7 +120,12 @@ onMounted(async () => {
       @generate="generate"
       @feedback="emit('feedback', $event)"
     />
-    <FormatToggle v-model="useFormat" title="Usar formatação" hint="Exibir como 00000-000" />
+    <FormatToggle
+      :model-value="useFormat"
+      title="Usar formatação"
+      hint="Exibir como 00000-000"
+      @update:model-value="updateFormat"
+    />
     <CepHistory
       :history="history"
       :use-format="useFormat"

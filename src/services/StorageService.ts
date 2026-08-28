@@ -1,4 +1,5 @@
 import type { StoredData, Theme } from '../types';
+import { normalizeStoredData } from './StoredDataValidator';
 
 const STORAGE_KEY = 'cepGenerator';
 const THEME_STORAGE_KEY = 'cepGeneratorTheme';
@@ -15,17 +16,14 @@ const STORAGE_FIELDS = [
   'selectedCardBrand',
   'savedCard'
 ];
-
 interface ChromeStorageArea {
   get(keys: string[]): Promise<StoredData>;
   set(data: StoredData): Promise<void>;
 }
-
 function getChromeStorage(): ChromeStorageArea | undefined {
-  const browserGlobal = globalThis as typeof globalThis & {
-    chrome?: { storage?: { local?: ChromeStorageArea } };
-  };
-  return browserGlobal.chrome?.storage?.local;
+  return (
+    globalThis as typeof globalThis & { chrome?: { storage?: { local?: ChromeStorageArea } } }
+  ).chrome?.storage?.local;
 }
 
 export class StorageService {
@@ -34,52 +32,50 @@ export class StorageService {
     const chromeStorage = getChromeStorage();
     if (chromeStorage) {
       try {
-        const data = await chromeStorage.get(STORAGE_FIELDS);
-        // localStorage é atualizado em toda gravação e evita perda de dados caso
-        // o popup seja fechado antes de o Chrome concluir sua própria escrita.
+        const chromeData = normalizeStoredData(await chromeStorage.get(STORAGE_FIELDS));
         return {
-          ...data,
+          ...chromeData,
           ...localData,
-          theme: this.loadThemeFallback() ?? localData.theme ?? data.theme
+          theme: this.loadThemeFallback() ?? localData.theme ?? chromeData.theme
         };
       } catch {
-        // A preferência de tema ainda pode ser recuperada pelo fallback abaixo.
+        /* O fallback local continua disponível. */
       }
     }
-
     return { ...localData, theme: this.loadThemeFallback() ?? localData.theme };
   }
 
-  async save(data: StoredData): Promise<void> {
+  async save(data: StoredData): Promise<boolean> {
     const mergedData = { ...this.loadLocalData(), ...data };
     this.saveThemeFallback(mergedData.theme);
-    this.saveLocalData(mergedData);
+    const savedLocally = this.saveLocalData(mergedData);
     const chromeStorage = getChromeStorage();
     if (chromeStorage) {
       try {
         await chromeStorage.set(mergedData);
+        return true;
       } catch {
-        // A cópia local, feita acima, mantém os dados disponíveis.
+        /* Usa o resultado local abaixo. */
       }
     }
+    return savedLocally;
   }
 
   private loadLocalData(): StoredData {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as StoredData;
+      return normalizeStoredData(JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
     } catch {
       return {};
     }
   }
-
-  private saveLocalData(data: StoredData): void {
+  private saveLocalData(data: StoredData): boolean {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      return true;
     } catch {
-      // O armazenamento da extensão continua sendo tentado abaixo.
+      return false;
     }
   }
-
   private loadThemeFallback(): Theme | undefined {
     try {
       const theme = localStorage.getItem(THEME_STORAGE_KEY);
@@ -88,13 +84,12 @@ export class StorageService {
       return undefined;
     }
   }
-
   private saveThemeFallback(theme: Theme | undefined): void {
     if (!theme) return;
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {
-      // Falhar no fallback não deve impedir o armazenamento principal.
+      /* O armazenamento principal ainda é tentado. */
     }
   }
 }

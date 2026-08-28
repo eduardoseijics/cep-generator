@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { DocumentService } from '../services/DocumentService';
+import { documentService } from '../services/DocumentService';
 import { StorageService } from '../services/StorageService';
 import type { DocumentKind } from '../types';
 import CopyButton from './CopyButton.vue';
 import FormatToggle from './FormatToggle.vue';
 
 const emit = defineEmits<{ feedback: [message: string] }>();
-const service = new DocumentService();
+const service = documentService;
 const storage = new StorageService();
 const kind = ref<DocumentKind>('cpf');
 const useFormat = ref(true);
 const digits = ref('');
+let hasInteracted = false;
 const hint = computed(() =>
   kind.value === 'cpf' ? 'Exibir como 000.000.000-00' : 'Exibir como 00.000.000/0000-00'
 );
@@ -22,25 +23,32 @@ const value = computed(() => {
     : digits.value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
 });
 
-function generate() {
+function generate(hasUserInteraction = true) {
+  hasInteracted ||= hasUserInteraction;
   digits.value = kind.value === 'cpf' ? service.generateCpf(false) : service.generateCnpj(false);
 }
 function selectKind(nextKind: DocumentKind) {
+  hasInteracted = true;
   kind.value = nextKind;
   generate();
+}
+function updateFormat(value: boolean) {
+  hasInteracted = true;
+  useFormat.value = value;
 }
 watch(useFormat, () => void storage.save({ useDocumentFormat: useFormat.value }));
 watch(kind, (value) => void storage.save({ selectedDocumentKind: value }));
 watch(digits, (value) => void storage.save({ documentDigits: value }));
 onMounted(async () => {
   const saved = await storage.load();
+  if (hasInteracted) return;
   useFormat.value = saved.useDocumentFormat ?? true;
   kind.value = saved.selectedDocumentKind === 'cnpj' ? 'cnpj' : 'cpf';
   const expectedLength = kind.value === 'cpf' ? 11 : 14;
   if (new RegExp(`^\\d{${expectedLength}}$`).test(saved.documentDigits || '')) {
     digits.value = saved.documentDigits!;
   } else {
-    generate();
+    generate(false);
   }
 });
 </script>
@@ -75,11 +83,16 @@ onMounted(async () => {
           @feedback="emit('feedback', $event)"
         />
       </div>
-      <button class="document-generate" type="button" @click="generate">
+      <button class="document-generate" type="button" @click="generate()">
         Gerar novo {{ kind.toUpperCase() }}
       </button>
     </section>
-    <FormatToggle v-model="useFormat" title="Usar máscara" :hint="hint" />
+    <FormatToggle
+      :model-value="useFormat"
+      title="Usar máscara"
+      :hint="hint"
+      @update:model-value="updateFormat"
+    />
   </section>
 </template>
 

@@ -15,6 +15,7 @@ const theme = ref<Theme>('light');
 const toast = ref('');
 let toastTimer = 0;
 let hasSelectedPanel = false;
+let hasChangedTheme = false;
 
 function notify(message: string) {
   toast.value = message;
@@ -22,6 +23,7 @@ function notify(message: string) {
   toastTimer = window.setTimeout(() => (toast.value = ''), 1800);
 }
 function toggleTheme() {
+  hasChangedTheme = true;
   theme.value = theme.value === 'light' ? 'dark' : 'light';
   void storage.save({ theme: theme.value });
 }
@@ -41,7 +43,7 @@ watch(theme, (value) => (document.documentElement.dataset.theme = value), {
 watch(panel, (value) => void storage.save({ activePanel: value }));
 onMounted(async () => {
   const saved = await storage.load();
-  theme.value = saved.theme === 'dark' ? 'dark' : 'light';
+  if (!hasChangedTheme) theme.value = saved.theme === 'dark' ? 'dark' : 'light';
   if (!hasSelectedPanel) {
     mountPanel(saved.activePanel && panels.includes(saved.activePanel) ? saved.activePanel : 'cep');
   }

@@ -17,12 +17,20 @@ function save(): void {
 </script>
 
 <template>
-  <div class="modal open">
+  <div class="modal open" role="dialog" aria-modal="true" aria-labelledby="customCepModalTitle">
     <div class="modal-backdrop" @click="emit('close')" />
     <form class="modal-card" @submit.prevent="save">
-      <h2>{{ item ? 'Editar CEP' : 'Adicionar CEP' }}</h2>
-      <input v-model="formCep" maxlength="9" placeholder="00000-000" @input="formatCepInput" />
-      <input v-model="formLabel" placeholder="Apelido (opcional)" />
+      <h2 id="customCepModalTitle">{{ item ? 'Editar CEP' : 'Adicionar CEP' }}</h2>
+      <label for="customCep">CEP</label>
+      <input
+        id="customCep"
+        v-model="formCep"
+        maxlength="9"
+        placeholder="00000-000"
+        @input="formatCepInput"
+      />
+      <label for="customCepLabel">Apelido (opcional)</label>
+      <input id="customCepLabel" v-model="formLabel" placeholder="Ex.: Casa" />
       <p class="form-error">{{ error }}</p>
       <div class="modal-actions">
         <button type="button" class="secondary-button" @click="emit('close')">Cancelar</button
@@ -76,12 +84,18 @@ function save(): void {
   background: #fff;
   font-size: 12px;
 }
-.modal-card > input + input {
-  margin-top: 9px;
+.modal-card > label {
+  display: block;
+  margin: 10px 1px 4px;
+  font-size: 11px;
+  font-weight: 700;
 }
 .modal-card > input:focus {
   border-color: #7564e9;
   box-shadow: 0 0 0 3px #6655dc12;
+}
+.modal-card > input:focus-visible {
+  outline: 3px solid #6655dc33;
 }
 .form-error {
   min-height: 15px;
